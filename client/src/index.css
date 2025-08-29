@@ -76,3 +76,30 @@
   margin-bottom: 2rem;
 }
 
+.sidebar-toggle {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.collapsed .sidebar {
+  width: 60px;
+  align-items: center;
+}
+
+.collapsed .sidebar-header span {
+  display: none;
+}
+
+.collapsed .sidebar-placeholder {
+  display: none;
+}
+
+.collapsed .main-content {
+  padding-left: 1rem;
+}
+
+

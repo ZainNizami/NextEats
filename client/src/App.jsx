@@ -5,12 +5,25 @@ import ReviewForm from "./components/ReviewForm";
 
 function App() {
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
+  const toggleSidebar = () => setSidebarCollapsed(!sidebarCollapsed);
 
   return (
-    <div className="layout">
+    <div className={`layout ${sidebarCollapsed ? "collapsed" : ""}`}>
       <aside className="sidebar">
-        <div className="sidebar-header">🍽️ NextEats</div>
-        <div className="sidebar-placeholder">[ login/signup buttons here later ]</div>
+        <div className="sidebar-header">
+          <button className="sidebar-toggle" onClick={toggleSidebar}>
+            ☰
+          </button>
+          {!sidebarCollapsed && <span>NextEats</span>}
+        </div>
+
+        {!sidebarCollapsed && (
+          <div className="sidebar-placeholder">
+            [ login/signup buttons here later ]
+          </div>
+        )}
       </aside>
 
       <main className="main-content">
