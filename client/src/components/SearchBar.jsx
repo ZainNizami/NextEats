@@ -9,7 +9,10 @@ export default function SearchBar({ onSelect }) {
 
   useEffect(() => {
     const q = input.trim();
-    if (q.length < 3) { setResults([]); return; }
+    if (q.length < 3) {
+      setResults([]);
+      return;
+    }
 
     const id = setTimeout(async () => {
       controllerRef.current?.abort();
@@ -18,20 +21,31 @@ export default function SearchBar({ onSelect }) {
 
       console.log("Fetching for:", q);
       try {
-        const resp = await fetch(`/api/search?term=${encodeURIComponent(q)}&location=Toronto`, { signal: controller.signal });
-        if (!resp.ok) { console.error("API error:", resp.status, await resp.text()); setResults([]); return; }
+        const resp = await fetch(
+          `/api/search?term=${encodeURIComponent(q)}&location=Toronto`,
+          { signal: controller.signal }
+        );
+        if (!resp.ok) {
+          console.error("API error:", resp.status, await resp.text());
+          setResults([]);
+          return;
+        }
         const data = await resp.json();
         setResults(Array.isArray(data) ? data : []);
       } catch (e) {
         if (e.name !== "AbortError") console.error("Network error:", e);
         setResults([]);
       }
-    }, 350);
+    }, 300);
 
     return () => clearTimeout(id);
   }, [input]);
 
-  const handleSelect = (r) => { onSelect?.(r); setInput(r.name); setResults([]); };
+  const handleSelect = (r) => {
+    onSelect?.(r);
+    setInput(r.name);
+    setResults([]);
+  };
 
   return (
     <div className="search-bar-container">
@@ -46,5 +60,4 @@ export default function SearchBar({ onSelect }) {
       <SearchResultsList results={results} onSelect={handleSelect} />
     </div>
   );
-
 }

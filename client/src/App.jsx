@@ -7,12 +7,14 @@ function App() {
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
 
   return (
-    <div className="App" style={{ paddingTop: "100px", textAlign: "center" }}>
-      <h1 style={{ fontSize: "3rem", marginBottom: "20px" }}>NextEats</h1>
-      <SearchBar onSelect={setSelectedRestaurant} />
-      {selectedRestaurant && (
-        <ReviewForm selectedRestaurant={selectedRestaurant} />
-      )}
+    <div className="app-wrapper">
+      <div className="app-content">
+        <h1 className="app-title">NextEats</h1>
+        <SearchBar onSelect={setSelectedRestaurant} />
+        {selectedRestaurant && (
+          <ReviewForm selectedRestaurant={selectedRestaurant} />
+        )}
+      </div>
     </div>
   );
 }

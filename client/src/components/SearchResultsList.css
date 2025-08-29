@@ -1,10 +1,13 @@
 .results-list {
-  position: absolute;
-  margin-top: 6px;
-  background: #111;
-  border: 1px solid #333;
-  width: 360px;
-  max-height: 320px;
+  margin-top: 8px;
+  width: 100%;
+  max-width: 400px;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   overflow-y: auto;
-  z-index: 999;
+  max-height: 300px;
+  z-index: 5;
+  position: relative;
 }
