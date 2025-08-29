@@ -1,0 +1,4 @@
+.search-result { padding: 8px 10px; cursor: pointer; }
+.search-result:hover { background: #222; }
+.name { font-weight: 600; }
+.meta { font-size: 12px; opacity: 0.8; }

@@ -1,0 +1,10 @@
+.results-list {
+  position: absolute;
+  margin-top: 6px;
+  background: #111;
+  border: 1px solid #333;
+  width: 360px;
+  max-height: 320px;
+  overflow-y: auto;
+  z-index: 999;
+}
