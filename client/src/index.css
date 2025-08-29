@@ -1,3 +1,11 @@
+:root {
+  --bg: #1a1a1a;
+  --text: white;
+  --accent: #d62828;
+  --secondary: #f77f00;
+  --muted-bg: #fff8f0;
+}
+
 .app-wrapper {
   background-color: #1a1a1a;
   color: white;
@@ -22,3 +30,49 @@
   margin-bottom: 2rem;
   color: #f77f00;
 }
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar {
+  width: 220px;
+  background-color: #d62828;
+  color: white;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar-header {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.sidebar-placeholder {
+  font-size: 0.875rem;
+  opacity: 0.8;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.main-content {
+  flex: 1;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.app-title {
+  font-size: 2.5rem;
+  color: #f77f00;
+  margin-bottom: 2rem;
+}
+
