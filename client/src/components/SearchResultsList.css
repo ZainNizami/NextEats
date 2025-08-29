@@ -5,9 +5,16 @@
   background-color: white;
   color: black;
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.18);
   overflow-y: auto;
   max-height: 300px;
-  z-index: 5;
   position: relative;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 160ms ease, transform 200ms ease;
+}
+
+.results-list.show {
+  opacity: 1;
+  transform: translateY(0);
 }

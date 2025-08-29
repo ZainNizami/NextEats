@@ -1,59 +1,59 @@
 import React, { useState } from "react";
+import "./ReviewForm.css";
 
-function ReviewForm({ selectedRestaurant }) {
-  const [rating, setRating] = useState("");
-  const [reviewText, setReviewText] = useState("");
+export default function ReviewForm({ selectedRestaurant }) {
+  const [rating, setRating] = useState(0);
+  const [hover, setHover] = useState(0);
+  const [review, setReview] = useState("");
+  const [error, setError] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    const payload = {
-      username: "demoUser",
-      restaurantId: selectedRestaurant.id,
-      rating,
-      reviewText,
-    };
-
-    try {
-      const res = await fetch("/api/rate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      const data = await res.json();
-      alert(data.message);
-    } catch (error) {
-      console.error("Failed to submit review:", error);
+    if (rating === 0 || review.trim() === "") {
+      setError("Please provide both a rating and a review.");
+      return;
     }
+
+    setError("");
+    console.log("✅ Review submitted:", {
+      restaurant: selectedRestaurant.name,
+      rating,
+      review,
+    });
+
+    // Reset
+    setRating(0);
+    setReview("");
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ marginTop: "30px" }}>
-      <h3>Leave a review for {selectedRestaurant.name}</h3>
-      <input
-        type="number"
-        placeholder="Rating (1-5)"
-        value={rating}
-        onChange={(e) => setRating(e.target.value)}
-        min="1"
-        max="5"
-        required
-      />
-      <br />
+    <form className="review-form" onSubmit={handleSubmit}>
+      <h2>Leave a review for <span>{selectedRestaurant.name}</span></h2>
+
+      <div className="star-rating">
+        {[1, 2, 3, 4, 5].map((star) => (
+          <span
+            key={star}
+            className={`star ${star <= (hover || rating) ? "filled" : ""}`}
+            onClick={() => setRating(star)}
+            onMouseEnter={() => setHover(star)}
+            onMouseLeave={() => setHover(0)}
+          >
+            ★
+          </span>
+        ))}
+      </div>
+
       <textarea
+        value={review}
+        onChange={(e) => setReview(e.target.value)}
         placeholder="Write your review..."
-        value={reviewText}
-        onChange={(e) => setReviewText(e.target.value)}
-        required
         rows={4}
-        cols={50}
-        style={{ marginTop: "10px" }}
       />
-      <br />
+
+      {error && <div className="error-msg">{error}</div>}
+
       <button type="submit">Submit Review</button>
     </form>
   );
 }
-
-export default ReviewForm;

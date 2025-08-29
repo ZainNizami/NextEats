@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SearchBar from "./components/SearchBar";
 import SearchResultsList from "./components/SearchResultsList";
 import ReviewForm from "./components/ReviewForm";
+import ThemeToggle from "./components/ThemeToggle";
 
 function App() {
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
@@ -13,6 +14,7 @@ function App() {
     <div className={`layout ${sidebarCollapsed ? "collapsed" : ""}`}>
       <aside className="sidebar">
         <div className="sidebar-header">
+          <ThemeToggle />
           <button className="sidebar-toggle" onClick={toggleSidebar}>
             ☰
           </button>
