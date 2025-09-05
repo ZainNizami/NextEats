@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from "react";
 import "./ReviewForm.css";
 
@@ -7,24 +8,27 @@ export default function ReviewForm({ selectedRestaurant }) {
   const [review, setReview] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (rating === 0 || review.trim() === "") {
-      setError("Please provide both a rating and a review.");
-      return;
+
+    if (!selectedRestaurant) return;
+
+    try {
+      const response = await axios.post("http://localhost:3000/api/reviews", {
+        restaurant: selectedRestaurant.name,
+        rating,
+        reviewText: review,
+      });
+
+      console.log("✅ Review submitted:", response.data);
+      // Optional: clear form
+      setRating(0);
+      setReview("");
+    } catch (error) {
+      console.error("❌ Error submitting review:", error);
     }
-
-    setError("");
-    console.log("✅ Review submitted:", {
-      restaurant: selectedRestaurant.name,
-      rating,
-      review,
-    });
-
-    // Reset
-    setRating(0);
-    setReview("");
   };
+
 
   return (
     <form className="review-form" onSubmit={handleSubmit}>
